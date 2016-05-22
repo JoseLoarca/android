@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.jcloarca.laboratorio2.bean.Usuario;
 import org.jcloarca.laboratorio2.volley.WebService;
 
 import org.json.JSONArray;
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button btnLogin;
     private EditText txtEmail, txtPassword;
+    private Usuario loggedUser=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,17 @@ public class LoginActivity extends AppCompatActivity {
                             JSONArray listaUsuarios = response.getJSONArray("user");
                             if(listaUsuarios.length()>0){
                                 JSONObject user = listaUsuarios.getJSONObject(0);
+                                loggedUser = new Usuario(
+                                        user.getInt("idUsuario"),
+                                        user.getString("nombreCompleto"),
+                                        user.getString("telefono"),
+                                        user.getString("correo"),
+                                        user.getString("direccion"),
+                                        user.getString("username"),
+                                        "",
+                                        response.getString("token"),
+                                        response.getString("exp")
+                                );
 
                                 Toast.makeText(getApplicationContext(), "Bienvenido "+user.getString("nombreCompleto"), Toast.LENGTH_LONG).show();
                             }else{
