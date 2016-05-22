@@ -1,5 +1,6 @@
 package org.jcloarca.laboratorio2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,8 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                         response.getString("token"),
                                         response.getString("exp")
                                 );
-
-                                Toast.makeText(getApplicationContext(), "Bienvenido "+user.getString("nombreCompleto"), Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(LoginActivity.this, Listado.class));
                             }else{
                                 Toast.makeText(getApplicationContext(), "Verifique sus credenciales.", Toast.LENGTH_LONG).show();
                             }
